@@ -1,8 +1,8 @@
 // Classe que levanta o servidor
 
-const customExpress = require('./config/customExpress')
+const customExpress = require('./config/CustomExpress')
 const conexao = require('./infra/DbConnection')
-
+const tabelas = require('./infra/Tabelas')
 const app = customExpress();
 const port = 3000;
 
@@ -13,6 +13,7 @@ conexao.connect(err => {
     }
     else
     console.log('Connection established');
+    tabelas.init(conexao);
     app.listen(port);
     console.log("servidor rodando na porta 3000");
 })
